@@ -1,0 +1,114 @@
+Data:
+
+each record has:
+Ad id
+category
+location
+title
+description
+price (price may be null or 0)
+date (date when ad is posted)
+
+Format:
+- xml format
+- they have a start tag <ad> and an end tag </ad>
+- NEWLINE CHARACTER AT THE end
+- Fields inside records are also formatted similarly w/ respective tags
+
+(Normally this would be on a single line, I broke it apart)
+<ad>
+  <aid>1304786670</aid>
+  <date>2018/11/07</date>
+  <loc>Calgary</loc>
+  <cat>camera-camcorder-lens</cat>
+  <ti>Nikon 500 mm F4 VR</ti>
+  <desc>I have owned this Nikon lens for about 2 years and purchased it new in
+    Calgary. The lens is extremely sharp, and fast focusing. It is a wildlife
+    or bird photographers dream lens. I am selling it</desc>
+  <price>8500</price>
+</ad>
+(Like This)
+<ad><aid>1304786670</aid><date>2018/11/07</date><loc>Calgary</loc><cat>camera-camcorder-lens</cat><ti>Nikon 500 mm F4 VR</ti><desc>I have owned this Nikon lens for about 2 years and purchased it new in Calgary. The lens is extremely sharp, and fast focusing. It is a wildlife or bird photographers dream lens. I am selling it</desc><price>8500</price></ad>
+
+ Phase 1:
+ - Read in an xml and output 4 files as described below
+
+1. terms.txt:
+- terms extracted from ad titles and descriptions
+- a term is a consecutive sequence of alphanumberic, underscore, and dashed
+  characters
+- for every term 'T' in the title or the desc ofan ad with id 'a',
+  there is a row in this file of the form t:a where t is the lowercase form of
+  T
+- ignore special characters coded as &#number, &apos, &quot and &amp
+- ignore terms of length less than 2
+- convert the terms to all lowercase before witing them out
+
+This is the output for the first ad in 10 records
+  nikon:1304786670
+  500:1304786670
+  have:1304786670
+  owned:1304786670
+  this:1304786670
+  nikon:1304786670
+  lens:1304786670
+  for:1304786670
+  about:1304786670
+  years:1304786670
+  and:1304786670
+  purchased:1304786670
+  new:1304786670
+  calgary:1304786670
+  the:1304786670
+  lens:1304786670
+  extremely:1304786670
+  sharp:1304786670
+  and:1304786670
+  fast:1304786670
+  focusing:1304786670
+  wildlife:1304786670
+  bird:1304786670
+  photographers:1304786670
+  dream:1304786670
+  lens:1304786670
+  selling:1304786670
+
+2. pdates.txt:
+- form 'd:a,c,l'
+- 'd' is a non-empty date at which the ad is posted
+- 'a', 'c', and 'l' are the ad id, category, and location
+
+This is the output for the first ad in the 10 records
+  2018/11/07:1304786670,camera-camcorder-lens,Calgary
+
+3. prices.txt:
+- includes one lien for each ad that has a non-empty price field
+- form 'P:a,c,l'
+- 'p' is a number indicating the price
+- 'a', 'c', and 'l' are the ad id, category and location
+- NOTE: 0 is included by NULL is not
+
+This is the output for the first ad in the 10 records
+  8500:1304786670,camera-camcorder-lens,Calgary
+
+4. ads.txt:
+- one line for each ad
+- form 'a:rec'
+- 'a' is the ad id
+- 'rec' is the full ad record in xml
+
+This is the output for the first ad in the 10 records
+  1304786670:<ad><aid>1304786670</aid><date>2018/11/07</date><loc>Calgary</loc><cat>camera-camcorder-lens</cat><ti>Nikon 500 mm F4 VR</ti><desc>I have owned this Nikon lens for about 2 years and purchased it new in Calgary. The lens is extremely sharp, and fast focusing. It is a wildlife or bird photographers dream lens. I am selling it</desc><price>8500</price></ad>
+
+This is the output broken down like the above xml file was
+  1304786670:<ad>
+    <aid>1304786670</aid>
+    <date>2018/11/07</date>
+    <loc>Calgary</loc>
+    <cat>camera-camcorder-lens</cat>
+    <ti>Nikon 500 mm F4 VR</ti>
+    <desc>I have owned this Nikon lens for about 2 years and purchased it
+      new in Calgary. The lens is extremely sharp, and fast focusing. It is
+      a wildlife or bird photographers dream lens. I am selling it</desc>
+    <price>8500</price>
+    </ad>
