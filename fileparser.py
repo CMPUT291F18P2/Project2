@@ -12,7 +12,7 @@
     Parameters:
         line (string) - the input line read from file
         cIndex (int)  - the current index of where we are in the line
-        
+
     Returns:
         tag (string) - the tag found by the program within the set fo tags
         cIndex (int) - the current index of where we are in the line
@@ -22,7 +22,7 @@
     it will return 'ad'
     Because we have processed the '<' at the start, it won't appear
     We go until we find the next '>'
-    
+
     set of tags: ad, aid, /aid, date, /date, loc, /loc, cat, /cat, ti, /ti,
         desc, /desc, price, /price, /ads
     Can also find other tags, but are ignored
@@ -57,12 +57,12 @@ def findTag(line, cIndex):
         tag (string) - the current tag for the data type, used later
         dataDict (dict) - the dictionary where all the info is stored
         aid (string) - the current UNIQUE AD ID used as a key in the dict
-        
+
     Returns:
         aid (string) - the new/current UNIQUE AD ID used as a key in the dict
         cIndex (int) - the current index of where we are in the line
         dataDict (dict) - the updated dictionary where all info is stored
-        
+
     i.e. given "54321</aid><date>2018/01/01</date></ad>" w/ tag = aid
     it will return a dict of { 54321: [('aid', 54321')] }
     of course the cIndex will be something and aid will be returned as 54321
@@ -87,14 +87,14 @@ def extSortData(line, tag, cIndex, dataDict, aid=None):
 
     Parameters:
         data (string) - the data we are to add to the dictionary
-        tag (string) - the current tag for the data type 
+        tag (string) - the current tag for the data type
         dataDict (dict) - the dictionary where all the info is stored
         aid (string) - the current UNIQUE AD ID used as a key in the dict
-        
+
     Returns:
         aid (string) - the new/current UNIQUE AD ID used as a key in the dict
         dataDict (dict) - the updated dictionary where all info is stored
-        
+
     I'm hoping this is pretty easy to understand, let me know if it needs
     better comments
     Dictionary format is in extSortData function documentation
@@ -129,22 +129,23 @@ def sortData(data, aid, dataDict, tag):
          prevData = dataDict[aid]
          prevData.append( ('price', data))
          dataDict[aid] = prevData
-    return (dataDict, aid)  
+    return (dataDict, aid)
 
 
 '''  Parse the data given in xml format as specifized by the project
 
     Parameters:
         file(string) - the file from which we will parse line by line
-        
+
     Returns:
         None
-        
-    Once given the data, we go through it line by line, looking for tags 
+
+    Once given the data, we go through it line by line, looking for tags
     and then the data that follows, and put it into a dictionary that we can
     then use to create the files required in the later phases.
 '''
 def parsefile(file):
+    print("We are parsing file {}\n".format(file))
     dataDict = dict()
     # Was suggested that we use 'with open(file)' via stackoverflow so I did
     with open(file) as file:
@@ -160,15 +161,15 @@ def parsefile(file):
                         # initialize cAID, for use in the entire ad
                         cAID = None #Because a new ID is coming!
                         pass
-                    elif tagStatus == 1:                 
+                    elif tagStatus == 1:
                         (cIndex, dataDict, cAID) = extSortData(line, tag,
                             cIndex+1, dataDict, aid=cAID)
-                cIndex += 1   
-    print(dataDict)
+                cIndex += 1
+    print("Here is the data in the dictinary:\n{}".format(dataDict))
     return
 
 def main():
-    file = '1000records.txt'
+    file = '10records.txt'
     parsefile(file)
 
 if __name__ == "__main__":

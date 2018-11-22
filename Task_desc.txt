@@ -37,12 +37,12 @@ Format:
 - terms extracted from ad titles and descriptions
 - a term is a consecutive sequence of alphanumberic, underscore, and dashed
   characters
-- for every term 'T' in the title or the desc ofan ad with id 'a',
+- for every term 'T' in the title or the desc of an ad with id 'a',
   there is a row in this file of the form t:a where t is the lowercase form of
   T
 - ignore special characters coded as &#number, &apos, &quot and &amp
 - ignore terms of length less than 2
-- convert the terms to all lowercase before witing them out
+- convert the terms to all lowercase before writing them out
 
 This is the output for the first ad in 10 records
   nikon:1304786670
