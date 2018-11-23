@@ -1,23 +1,27 @@
 import xml.etree.ElementTree as ET
 
-def prep_file(root):
-   f1 = open("terms.txt", 'w+')
-   for ad in list(root):
-       desc = ad.find('desc').text
-       aid = ad.find('aid').text
-       ti = ad.find('ti').text
-       ti = ti.replace("&apos", "'")
-       ti = ti.replace("&quot", '"')
-       ti = ti.replace("&amp", "&")
-       tiList = ti.split()
-       # for word in
+def createTerms(root):
+    f1 = open("terms.txt", 'w+')
+    for ad in list(root):
+        terms = []
+        aid = ad.find('aid').text
 
-       print("desc type is {}, and is\n{}".format(type(desc), desc))
-   f1.close()
+        ti = ad.find('ti').text
+        tiList = ti.split()
+        for word in tiList:
+            if len(word) > 2:
+                terms.append(word.lower())
 
-    # f2 = createPdate(root)
-    # f3 = createPrices(root)
-    # f4 = createAds(root)
+        desc = ad.find('desc').text
+        descList = desc.split()
+        for word in descList:
+            if len(word) > 2:
+                terms.append(word.lower())
+
+        for words in terms:
+            f1.write('%s:%s\n' % (words, aid))
+    f1.close()
+    return f1
 
 def createPdate(root):
     f2 = open("pdates.txt", 'w+')
@@ -56,10 +60,13 @@ def createAds(root):
     return f4
 
 def main():
-    file = input('Enter name of file to be prepped:\n')
+    file = input('Enter name of file to be prepped: ')
     tree = ET.parse(file)
     root = tree.getroot()
-    prep_file(root)
+    createTerms(root)
+    createPdate(root)
+    createPrices(root)
+    createAds(root)
 
 if __name__ == "__main__":
     main()
