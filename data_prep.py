@@ -41,9 +41,9 @@ def createPrices(root):
         aid = ad.find('aid').text
         cat = ad.find('cat').text
         loc = ad.find('loc').text
-        f3.write('%s:%s,%s,%s\n' % (price, aid, cat, loc))
+        f3.write('{}%s:%s,%s,%s\n'.format('          ') % (price, aid, cat, loc))
     f3.close()
-    return f3
+    return 3
 
 def createAds(root):
     f4 = open("ads.txt", 'w+')
