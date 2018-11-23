@@ -7,12 +7,14 @@ def createTerms(root):
         aid = ad.find('aid').text
 
         ti = ad.find('ti').text
+        if "&#" in ti: print(ti)
         tiList = ti.split()
         for word in tiList:
             if len(word) > 2:
                 terms.append(word.lower())
 
         desc = ad.find('desc').text
+        if "&#" in desc: print(ti)        
         descList = desc.split()
         for word in descList:
             if len(word) > 2:

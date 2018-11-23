@@ -145,7 +145,7 @@ def sortData(data, aid, dataDict, tag):
     then use to create the files required in the later phases.
 '''
 def parsefile(file):
-    print("We are parsing file {}\n".format(file))
+    # print("We are parsing file {}\n".format(file))
     dataDict = dict()
     # Was suggested that we use 'with open(file)' via stackoverflow so I did
     with open(file) as file:
@@ -165,12 +165,13 @@ def parsefile(file):
                         (cIndex, dataDict, cAID) = extSortData(line, tag,
                             cIndex+1, dataDict, aid=cAID)
                 cIndex += 1
-    print("Here is the data in the dictinary:\n{}".format(dataDict))
-    return
+    # print("Here is the data in the dictinary:\n{}".format(dataDict))
+    return dataDict
 
 def main():
     file = '10records.txt'
-    parsefile(file)
+    dataDict = parsefile(file)
+
 
 if __name__ == "__main__":
     main()
