@@ -14,7 +14,7 @@ def createTerms(root):
                 terms.append(word.lower())
 
         desc = ad.find('desc').text
-        if "&#" in desc: print(ti)        
+        if "&#" in desc: print(ti)
         descList = desc.split()
         for word in descList:
             if len(word) > 2:
@@ -45,7 +45,7 @@ def createPrices(root):
         loc = ad.find('loc').text
         f3.write('{}%s:%s,%s,%s\n'.format('          ') % (price, aid, cat, loc))
     f3.close()
-    return 3
+    return f3
 
 def createAds(root):
     f4 = open("ads.txt", 'w+')

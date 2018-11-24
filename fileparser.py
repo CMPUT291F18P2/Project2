@@ -121,7 +121,6 @@ def sortData(data, aid, dataDict, tag):
         prevData.append( ('ti', data))
         dataDict[aid] = prevData
     elif tag == 'desc':
-        # TODO: Fix the string problem, as in the spec, will do later
          prevData = dataDict[aid]
          prevData.append( ('desc', data))
          dataDict[aid] = prevData
@@ -138,17 +137,16 @@ def sortData(data, aid, dataDict, tag):
         file(string) - the file from which we will parse line by line
 
     Returns:
-        None
+        dataDict (dict) - dictionary with all the data we have parsed
 
     Once given the data, we go through it line by line, looking for tags
     and then the data that follows, and put it into a dictionary that we can
     then use to create the files required in the later phases.
 '''
-def parsefile(file):
-    # print("We are parsing file {}\n".format(file))
+def parsefile(rawDataFile):
     dataDict = dict()
     # Was suggested that we use 'with open(file)' via stackoverflow so I did
-    with open(file) as file:
+    with open(rawDataFile) as file:
         for line in file:
             cIndex = 0
             # A while loop is used so we can change the index in many functions
@@ -165,11 +163,10 @@ def parsefile(file):
                         (cIndex, dataDict, cAID) = extSortData(line, tag,
                             cIndex+1, dataDict, aid=cAID)
                 cIndex += 1
-    # print("Here is the data in the dictinary:\n{}".format(dataDict))
     return dataDict
 
 def main():
-    file = '10records.txt'
+    file = input('Enter name of file to be prepped: ')
     dataDict = parsefile(file)
 
 
