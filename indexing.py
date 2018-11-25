@@ -13,11 +13,31 @@ def adshash(file):
 
 import subprocess
 
-pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('ads.txt','r'),stdout = subprocess.PIPE)
-pipe2 = subprocess.Popen(["db_load","-T","-t","hash","ad.idx"],stdin = pipe.stdout)
-pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('terms.txt','r'),stdout = subprocess.PIPE)
-pipe2 = subprocess.Popen(["db_load","-T","-t","btree","te.idx"],stdin = pipe.stdout)
-pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('pdates.txt','r'),stdout = subprocess.PIPE)
-pipe2 = subprocess.Popen(["db_load","-T","-t","btree","da.idx"],stdin = pipe.stdout)
-pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('prices.txt','r'),stdout = subprocess.PIPE)
-pipe2 = subprocess.Popen(["db_load","-T","-t","btree","pr.idx"],stdin = pipe.stdout)
+# Create hash index on ads.txt
+def indexAds():
+	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('ads.txt','r'),stdout = subprocess.PIPE)
+	pipe2 = subprocess.Popen(["db_load","-T","-t","hash","ad.idx"],stdin = pipe.stdout)
+
+# Create b+-tree on terms.txt
+def indexTerms():
+	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('terms.txt','r'),stdout = subprocess.PIPE)
+	pipe2 = subprocess.Popen(["db_load","-T","-t","btree","te.idx"],stdin = pipe.stdout)
+
+# Create b+-tree on pdates.txt
+def indexPdates():
+	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('pdates.txt','r'),stdout = subprocess.PIPE)
+	pipe2 = subprocess.Popen(["db_load","-T","-t","btree","da.idx"],stdin = pipe.stdout)
+
+# Create b+-tree on prices.txt
+def indexPrices():
+	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('prices.txt','r'),stdout = subprocess.PIPE)
+	pipe2 = subprocess.Popen(["db_load","-T","-t","btree","pr.idx"],stdin = pipe.stdout)
+
+def main():
+	indexAds()
+	indexTerms()
+	indexPdates()
+	indexPrices()
+
+if __name__ == "__main__":
+	main()
