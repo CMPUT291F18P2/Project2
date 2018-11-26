@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ads type="array">
+<ad><aid>1003735318</aid><date>2018/11/07</date><loc>Edmonton</loc><cat>art-collectibles</cat><ti>Antique Hummel figurine</ti><desc>-&#034;soloist&#034; #135 -perfect condition -1960-1972 mark -call lloyd 780-217-9527</desc><price>50</price></ad>
+</ads>
