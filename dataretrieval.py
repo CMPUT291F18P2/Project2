@@ -159,7 +159,7 @@ def locationCheck(loc):
     id = list()
     while iter:
         items = iter[1].decode("utf-8").split(",")
-        if e.findall(loc,items[1]) != None:
+        if re.findall(loc,items[1]) != None:
             id.append(items[0])
         iter = curs.next()
     return id
@@ -170,8 +170,6 @@ def catagoryCheck(cat):
     id = list()
     while iter:
         items = iter[1].decode("utf-8").split(",")
-        print(items[1],cat)
-        print(re.findall(cat,items[1]))
         if re.findall(cat,items[1]) != None:
             id.append(items[0])
         iter = curs.next()
