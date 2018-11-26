@@ -214,11 +214,11 @@ def main():
             grammar(input("Query: "))
 
         elif (userInput == "change format"):
-			outputFormat = input("(full/brief): output=").lower()
-			print("Format has been changed to %s\n" % outputFormat)
+            outputFormat = input("(full/brief): output=").lower()
+            print("Format has been changed to %s\n" % outputFormat)
 
-		elif (userInput == "quit"):
-			break
+        elif (userInput == "quit"):
+            break
 
 if __name__ == "__main__":
 	main()
