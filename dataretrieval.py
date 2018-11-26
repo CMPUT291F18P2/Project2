@@ -205,15 +205,15 @@ def main():
 	print("Welcome to Kijiji\n")
 	print('Type "help" for list of available commands\n')
 	while(True):
-		userInput = input("What would you like to do? ").lower()
-		if (userInput == "help"):
-			print("Enter query, change format, quit\n")
+        userInput = input("What would you like to do? ").lower()
+        if (userInput == "help"):
+            print("Enter query, change format, quit\n")
 
-		elif (userInput == "enter query"):
-			queryBreakdown(input("Query: "))
+        elif (userInput == "enter query"):
+            queryBreakdown(input("Query: "))
             grammar(input("Query: "))
 
-		elif (userInput == "change format"):
+        elif (userInput == "change format"):
 			outputFormat = input("(full/brief): output=").lower()
 			print("Format has been changed to %s\n" % outputFormat)
 
