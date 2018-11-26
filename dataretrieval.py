@@ -69,13 +69,15 @@ def grammar(input,outputFormat):
         inputexpr = re.findall(expression,inputquery.group())
         for expr in inputexpr:
             if re.match(dateQuery,expr) != None:
-                pass
+                resultid = set(dateCheck(re.findall("[=<>]",expr),re.findall(date,expr)))
             elif re.match(priceQuery,expr) != None:
                 resultid = set(priceCheck(re.findall("[=<>]",expr),re.findall(price,expr)))
             elif re.match(locationQuery,expr) != None:
                 resultid = set(locationCheck(re.findall(location,expr)[1]))
             elif re.match(catQuery,expr) != None:
                 resultid = set(catagoryCheck(re.findall(cat,expr)[1]))
+            elif re.match(termQuery,query) != None:
+                resultid = set(termCheck(re.findall(termQuery,expr)))
             print(id,resultid)
             id = id & resultid
         ads = adSearch(id,outputFormat)
