@@ -72,7 +72,7 @@ def grammar(input,outputFormat):
             if re.match(dateQuery,expr) != None:
                 pass
             elif re.match(priceQuery,expr) != None:
-                print(re.findall("[<>=]",expr))
+                print(re.findall("(?:=|>|<|>=|<=)",expr))
                 resultid = set(priceCheck(re.findall(["=<>"],expr),re.findall(price,expr)))
             elif re.match(locationQuery,expr) != None:
                 resultid = set(locationCheck(re.findall(location,expr)[1]))
