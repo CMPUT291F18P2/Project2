@@ -48,55 +48,54 @@ def prepFile():
 	indexing.main()
 
 def queryBreakdown(query):
-    commands = {date:dateCheck,price:priceCheck,location:locationCheck,cat:catagoryCheck}
-    phrases = re.findall(r"\w+", query)
-    operators = re.findall(r">=|<=|=|<|>", query)
-    for stuff in len(splitquery):
-        if splitquery[stuff] in commands:
-            stuff1 = splitquery[stuff+1]
-            stuff1 = splitquery[stuff+2]
-            commands[splitquery[stuff]](stuff1,stuff2)
-        else:
-            termsCheck(splitquery[stuff])
+	commands = {date:dateCheck,price:priceCheck,location:locationCheck,cat:catagoryCheck}
+	phrases = re.findall(r"\w+", query)
+	operators = re.findall(r">=|<=|=|<|>", query)
+	for stuff in len(splitquery):
+		if splitquery[stuff] in commands:
+			stuff1 = splitquery[stuff+1]
+			stuff1 = splitquery[stuff+2]
+			commands[splitquery[stuff]](stuff1,stuff2)
+		else:
+			termsCheck(splitquery[stuff])
 
 def priceCheck(op,num):
-    db,curs = getCursor(4)
-    if op == ">":
-        result = curs.set_range(num.encode("utf-8"))
-        result = curs.next()
-    elif op == ">=":
-        result = curs.set_range(num.encode("utf-8"))
-    elif op == "<":
-        result = curs.set_range(max = num.encode("utf-8"))
-        result = curs.next()
-    elif op == "<=":
-        result = curs.set_range(max = num.encode("utf-8"))
-    while(result != None):
-        id = result[1].decode("utf-8")
-        result = curs.next()
-    return id
+	db,curs = getCursor(4)
+	if op == ">":
+		result = curs.set_range(num.encode("utf-8"))
+		result = curs.next()
+	elif op == ">=":
+		result = curs.set_range(num.encode("utf-8"))
+	elif op == "<":
+		result = curs.set_range(max = num.encode("utf-8"))
+		result = curs.next()
+	elif op == "<=":
+		result = curs.set_range(max = num.encode("utf-8"))
+	while(result != None):
+		id = result[1].decode("utf-8")
+		result = curs.next()
+	return id
 
 def main():
-    prepFile()
+	prepFile()
+	outputFormat = "full"
 
-    outputFormat = "full"
+	print("Welcome to Kijiji\n")
+	print('Type "help" for list of available commands\n')
+	while(True):
+		userInput = input("What would you like to do? ").lower()
+		if (userInput == "help"):
+			print("Enter query, change format, quit\n")
 
-    print("Welcome to Kijiji\n")
-    print('Type "help" for list of available commands\n')
-    while(True):
-        userInput = input("What would you like to do? ").lower()
-        if (userInput == "help"):
-	        print("Enter query, change format, quit\n")
+		elif (userInput == "enter query"):
+			queryBreakdown(input("Query: "))
 
-        elif (userInput == "enter query"):
-            queryBreakdown(input("Query: "))
+		elif (userInput == "change format"):
+			outputFormat = input("(full/brief): output=").lower()
+			print("Format has been changed to %s\n" % outputFormat)
 
-        elif (userInput == "change format"):
-            outputFormat = input("(full/brief): output=").lower()
-            print("Format has been changed to %s\n" % outputFormat)
-
-        elif (userInput == "quit"):
-            break
+		elif (userInput == "quit"):
+			break
 
 
 
