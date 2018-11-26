@@ -74,9 +74,9 @@ def grammar(input,outputFormat):
             elif re.match(priceQuery,expr) != None:
                 pass
             elif re.match(locationQuery,expr) != None:
-                resultid = set(locationCheck(re.findall(location,expr)))
+                resultid = set(locationCheck(re.findall(location,expr)[0]))
             elif re.match(catQuery,expr) != None:
-                resultid = set(catagoryCheck(re.findall(cat,expr)))
+                resultid = set(catagoryCheck(re.findall(cat,expr)[0]))
             id = id & resultid
         ads = adSearch(id,outputFormat)
         for ad in ads:
