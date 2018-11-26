@@ -38,7 +38,7 @@ def getCursor(type):
 
 	return database, database.cursor()
 
-def grammar():
+def grammar(query):
 # grammar to check if the user's input complies with the format. can be used to determine if its a date query, location query, etc...
     alphanumeric = "[0-9a-zA-Z_-]"
     numeric = "[0-9]"
@@ -211,6 +211,7 @@ def main():
 
 		elif (userInput == "enter query"):
 			queryBreakdown(input("Query: "))
+            grammar(input("Query: "))
 
 		elif (userInput == "change format"):
 			outputFormat = input("(full/brief): output=").lower()
