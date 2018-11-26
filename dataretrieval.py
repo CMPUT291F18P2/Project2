@@ -39,7 +39,7 @@ def getCursor(type):
         database.set_flags(db.DB_DUP)
         database.open(pricesFile, None, db.DB_BTREE, db.DB_CREATE)
 
-	return database, database.cursor()
+    return database, database.cursor()
 
 def grammar(input):
 # grammar to check if the user's input complies with the format. can be used to determine if its a date query, location query, etc...
