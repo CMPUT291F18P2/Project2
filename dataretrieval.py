@@ -141,11 +141,11 @@ def dateCheck(op,date):
     elif op == "=":
         result = curs.set(date.encode("utf-8"))
         while(result != None):
-            id.append(result[1].decode("utf-8"))
+            id.append(result[1].decode("utf-8").split(",")[0])
             result = curs.next_dup()
         return id
     while(result != None):
-        id.append(result[1].decode("utf-8"))
+        id.append(result[1].decode("utf-8").split(",")[0])
         result = curs.next()
     return id
 
