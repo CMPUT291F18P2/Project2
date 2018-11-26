@@ -116,13 +116,13 @@ def priceCheck(op,num):
     elif op[0] == "=":
         result = curs.set(num[0].encode("utf-8"))
         while(result != None):
-            id.append(result[1].decode("utf-8"))
+            id.append(result[1].decode("utf-8").split(",")[0])
             result = curs.next_dup()
         return id
     if len(op) == 2:
         result = curs.next()
     while(result != None):
-        id.append(result[1].decode("utf-8"))
+        id.append(result[1].decode("utf-8").split(",")[0])
         result = curs.next()
     return id
 
