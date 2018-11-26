@@ -14,27 +14,30 @@ def getCursor(type):
 	pricesCurs = 3
 
 	database = db.DB()
-	database.set_flags(db.DB_DUP)
+
 
 	# Database for ads
-	if type == adsCurs:
-		adsFile = "ad.idx"
-		database.open(adsFile, None, db.DB_HASH, db.DB_CREATE)
+    if type == adsCurs:
+        adsFile = "ad.idx"
+        database.open(adsFile, None, db.DB_HASH, db.DB_CREATE)
 
 	# Database for terms
-	elif type == termsCurs:
-		termsFile = "te.idx"
-		database.open(termsFile, None, db.DB_BTREE, db.DB_CREATE)
+    elif type == termsCurs:
+        termsFile = "te.idx"
+        database.set_flags(db.DB_DUP)
+        database.open(termsFile, None, db.DB_BTREE, db.DB_CREATE)
 
 	# Database for pdates
-	elif type == pdateCurs:
-		pdatesFile = "da.idx"
-		database.open(pdatesFile, None, db.DB_BTREE, db.DB_CREATE)
+    elif type == pdateCurs:
+        pdatesFile = "da.idx"
+        database.set_flags(db.DB_DUP)
+        database.open(pdatesFile, None, db.DB_BTREE, db.DB_CREATE)
 
-	# Database for prices
-	elif type == pricesCurs:
-		pricesFile = "pr.idx"
-		database.open(pricesFile, None, db.DB_BTREE, db.DB_CREATE)
+    # Database for prices
+    elif type == pricesCurs:
+        pricesFile = "pr.idx"
+        database.set_flags(db.DB_DUP)
+        database.open(pricesFile, None, db.DB_BTREE, db.DB_CREATE)
 
 	return database, database.cursor()
 
