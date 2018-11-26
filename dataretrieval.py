@@ -39,6 +39,27 @@ def getCursor(type):
 
 	return database, database.cursor()
 
+def grammar():
+	alphanumeric = "[0-9a-zA-Z_-]"
+	numeric = "[0-9]"
+	date = "[0-9]{4}/[0-9]{2}/[0-9]{2}"
+	datePrefix = "date[\\s]*(?:=|>|<|>=|<=)"
+	dateQuery = "{}[\\s]*{}".format(datePrefix, date)
+	price = "{}+".format(numeric)
+	pricePrefix = "price[\\s]*(?:=|>|<|>=|<=)"
+	priceQuery = "{}[\\s]*{}".format(pricePrefix, price)
+	location = "{}+".format(alphanumeric)
+	locationPrefix = "location[\\s]*="
+	locationQuery = "{}[\\s]*{}".format(locationPrefix, location)
+	cat = "{}+".format(alphanumeric)
+	catPrefix = "cat[\\s]*="
+	catQuery = "{}[\\s]*{}".format(catPrefix, cat)
+	term = "{}+".format(alphanumeric)
+	termSuffix = "%"
+	termQuery = "{0}{1}|{0}".format(term, termSuffix)
+	expression = "{}|{}|{}|{}|{}".format(dateQuery, priceQuery, locationQuery, catQuery, termQuery)
+	query = "\\A({0})(?:[\\s]({0}))*\\Z".format(expression)
+
 ''' Preparing files for Berkeley DB usage
     From a record input, this function generates .txt files for ads, terms, pdates, and prices
     These .txt files are then indexed into .idx files
