@@ -176,6 +176,7 @@ def catagoryCheck(cat):
         if re.findall(cat,items[1]) != None:
             id.append(items[0])
         iter = curs.next()
+        print(id)
     return id
 
 def termCheck(term):
