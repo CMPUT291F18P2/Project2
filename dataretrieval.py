@@ -192,6 +192,7 @@ def termCheck(term):
 
 def adSearch(idlist,output):
     db,curs = getCursor(0)
+    result = list()
     if output == "full":
         for id in idlist:
             result.append(db.get(id.encode("utf-8")))
