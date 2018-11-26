@@ -12,7 +12,7 @@ def getCursor(type):
 	adsCurs = 0
 	termsCurs = 1
 	pdateCurs = 2
-	pricesCurs = 4
+	pricesCurs = 3
 
 	database = db.DB()
 	database.set_flags(db.DB_DUP)
@@ -52,7 +52,7 @@ def queryBreakdown(query):
 	operators = re.findall(r">=|<=|=|<|>", query)
 
 def priceCheck(op,num):
-	db,curs = getCursor(4)
+	db,curs = getCursor(3)
 	if op == ">":
 		result = curs.set_range(num.encode("utf-8"))
 		result = curs.next()
@@ -67,6 +67,25 @@ def priceCheck(op,num):
 		id = result[1].decode("utf-8")
 		result = curs.next()
 	return id
+
+def dateCheck(op,date):
+	db,curs = getCursor(2)
+	if op == ">":
+		result = curs.set_range(num.encode("utf-8"))
+		result = curs.next()
+	elif op == ">=":
+		result = curs.set_range(num.encode("utf-8"))
+	elif op == "<":
+		result = curs.set_range(max = num.encode("utf-8"))
+	elif op == "<=":
+		result = curs.set_range(max = num.encode("uft-8"))
+	while(result != None):
+		id = result[1].decode("utf-8")
+		result = curs.next()
+	return id
+
+def termCheck(term):
+	return 0
 
 def main():
 	prepFile()
