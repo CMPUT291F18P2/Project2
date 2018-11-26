@@ -199,12 +199,12 @@ def adSearch(idlist,output):
         return 1
 
 def main():
-	prepFile()
-	outputFormat = "full"
+    prepFile()
+    outputFormat = "full"
 
-	print("Welcome to Kijiji\n")
-	print('Type "help" for list of available commands\n')
-	while(True):
+    print("Welcome to Kijiji\n")
+    print('Type "help" for list of available commands\n')
+    while(True):
         userInput = input("What would you like to do? ").lower()
         if (userInput == "help"):
             print("Enter query, change format, quit\n")
