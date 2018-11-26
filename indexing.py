@@ -33,11 +33,18 @@ def indexPrices():
 	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('prices.txt','r'),stdout = subprocess.PIPE)
 	pipe2 = subprocess.Popen(["db_load","-T","-t","btree","pr.idx"],stdin = pipe.stdout)
 
+def sortTxtFiles():
+    subprocess.call(["sort","-u","ads.txt","-o","ads.txt"])
+    subprocess.call(["sort","-u","terms.txt","-o","terms.txt"])
+    subprocess.call(["sort","-u","pdates.txt","-o","pdates.txt"])
+    subprocess.call(["sort","-u","prices.txt","-o","prices.txt"])
+
 def main():
-	indexAds()
-	indexTerms()
-	indexPdates()
-	indexPrices()
+    sortTxtFiles()
+    indexAds()
+    indexTerms()
+    indexPdates()
+    indexPrices()
 
 if __name__ == "__main__":
 	main()

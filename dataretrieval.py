@@ -64,5 +64,11 @@ def main():
 		elif (userInput == "quit"):
 			break
 
+def priceCheck(more,equal,num):
+    if more:
+        print('Hi')
+    else:
+        print('Hey')
+
 if __name__ == "__main__":
 	main()
