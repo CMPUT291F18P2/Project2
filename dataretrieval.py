@@ -171,6 +171,7 @@ def catagoryCheck(cat):
     return id
 
 def termCheck(term):
+    print(term)
     db,curs = getCursor(1)
     id = list()
     if term[-1] == '%':
