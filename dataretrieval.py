@@ -67,7 +67,7 @@ def grammar(input):
     if inputquery != None:
         id = set(allAds())
         inputexpr = re.match(expression,inputquery.group(0))
-        for expr in inputexpr:
+        for expr in inputexpr.groups():
             if re.match(dateQuery,expr) != None:
                 pass
             elif re.match(priceQuery,expr) != None:
