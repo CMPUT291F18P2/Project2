@@ -108,6 +108,7 @@ def dateCheck(op,date):
 	return id
 
 def termCheck(term):
+	db,curs = getCursor(1)
 # still needs to be completed
 	return 0
 
