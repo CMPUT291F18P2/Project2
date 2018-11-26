@@ -1,7 +1,6 @@
 from bsddb3 import db
 import filecreator
 import indexing
-import operator
 import re
 
 ''' Initializing Berkeley databases
@@ -61,6 +60,23 @@ def grammar():
 	expression = "{}|{}|{}|{}|{}".format(dateQuery, priceQuery, locationQuery, catQuery, termQuery)
 	query = "\\A({0})(?:[\\s]({0}))*\\Z".format(expression)
 
+    inputquery = re.match(query, input)
+    if inputquery != None:
+        id = set(allAds())
+        inputexpr = re.match(expression,inputquery)
+        for expr in inputexpr:
+            if re.match(dateQuery,expr) != None:
+                pass
+            elif re.match(priceQuery,expr) != None:
+                pass
+            elif re.match(locationQuery,expr) != None:
+                resultid = set(locationCheck(re.match(location,re.match(locationQuery,expr))))
+            elif re.match(catQuery,expr) != None:
+                resultid = set(catagoryCheck(re.match(cat,re.match(catQuery,expr))))
+            id = id & resultid
+        return id
+    else:
+        print("Invalid query")
 ''' Preparing files for Berkeley DB usage
     From a record input, this function generates .txt files for ads, terms, pdates, and prices
     These .txt files are then indexed into .idx files
@@ -68,6 +84,16 @@ def grammar():
 def prepFile():
 	filecreator.main()
 	indexing.main()
+
+def allAds():
+    db,curs = getCursor(0)
+    iter = curs.first()
+    id = list()
+    while iter:
+        id.append(iter[0])
+        iter = curs.next()
+    return id
+
 
 def queryBreakdown(query):
 # separates operators from words regardless of spacing. still unsure of where to use it
