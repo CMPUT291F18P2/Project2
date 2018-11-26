@@ -76,7 +76,7 @@ def grammar(input,outputFormat):
                 resultid = set(locationCheck(re.findall(location,expr)[1]))
             elif re.match(catQuery,expr) != None:
                 resultid = set(catagoryCheck(re.findall(cat,expr)[1]))
-            elif re.match(termQuery,query) != None:
+            elif re.match(termQuery,expr) != None:
                 resultid = set(termCheck(re.findall(termQuery,expr)))
             print(id,resultid)
             id = id & resultid
