@@ -40,25 +40,25 @@ def getCursor(type):
 
 def grammar():
 # grammar to check if the user's input complies with the format. can be used to determine if its a date query, location query, etc...
-	alphanumeric = "[0-9a-zA-Z_-]"
-	numeric = "[0-9]"
-	date = "[0-9]{4}/[0-9]{2}/[0-9]{2}"
-	datePrefix = "date[\\s]*(?:=|>|<|>=|<=)"
-	dateQuery = "{}[\\s]*{}".format(datePrefix, date)
-	price = "{}+".format(numeric)
-	pricePrefix = "price[\\s]*(?:=|>|<|>=|<=)"
-	priceQuery = "{}[\\s]*{}".format(pricePrefix, price)
-	location = "{}+".format(alphanumeric)
-	locationPrefix = "location[\\s]*="
-	locationQuery = "{}[\\s]*{}".format(locationPrefix, location)
-	cat = "{}+".format(alphanumeric)
-	catPrefix = "cat[\\s]*="
-	catQuery = "{}[\\s]*{}".format(catPrefix, cat)
-	term = "{}+".format(alphanumeric)
-	termSuffix = "%"
-	termQuery = "{0}{1}|{0}".format(term, termSuffix)
-	expression = "{}|{}|{}|{}|{}".format(dateQuery, priceQuery, locationQuery, catQuery, termQuery)
-	query = "\\A({0})(?:[\\s]({0}))*\\Z".format(expression)
+    alphanumeric = "[0-9a-zA-Z_-]"
+    numeric = "[0-9]"
+    date = "[0-9]{4}/[0-9]{2}/[0-9]{2}"
+    datePrefix = "date[\\s]*(?:=|>|<|>=|<=)"
+    dateQuery = "{}[\\s]*{}".format(datePrefix, date)
+    price = "{}+".format(numeric)
+    pricePrefix = "price[\\s]*(?:=|>|<|>=|<=)"
+    priceQuery = "{}[\\s]*{}".format(pricePrefix, price)
+    location = "{}+".format(alphanumeric)
+    locationPrefix = "location[\\s]*="
+    locationQuery = "{}[\\s]*{}".format(locationPrefix, location)
+    cat = "{}+".format(alphanumeric)
+    catPrefix = "cat[\\s]*="
+    catQuery = "{}[\\s]*{}".format(catPrefix, cat)
+    term = "{}+".format(alphanumeric)
+    termSuffix = "%"
+    termQuery = "{0}{1}|{0}".format(term, termSuffix)
+    expression = "{}|{}|{}|{}|{}".format(dateQuery, priceQuery, locationQuery, catQuery, termQuery)
+    query = "\\A({0})(?:[\\s]({0}))*\\Z".format(expression)
 
     inputquery = re.match(query, input)
     if inputquery != None:
@@ -107,45 +107,45 @@ def priceCheck(op,num):
         result = curs.set_range(num.encode("utf-8"))
         result = curs.next()
     elif op == ">=":
-		result = curs.set_range(num.encode("utf-8"))
+        result = curs.set_range(num.encode("utf-8"))
     elif op == "<":
-		result = curs.set_range(max = num.encode("utf-8"))
-		result = curs.next()
+        result = curs.set_range(max = num.encode("utf-8"))
+        result = curs.next()
     elif op == "<=":
-		result = curs.set_range(max = num.encode("utf-8"))
+        result = curs.set_range(max = num.encode("utf-8"))
     elif op == "=":
         result = curs.set(num.encode("utf-8"))
         while(result != None):
             id.append(result[1].decode("utf-8"))
             result = curs.next_dup()
         return id
-	while(result != None):
-		id.append(result[1].decode("utf-8"))
-		result = curs.next()
-	return id
+    while(result != None):
+        id.append(result[1].decode("utf-8"))
+        result = curs.next()
+    return id
 
 def dateCheck(op,date):
-	db,curs = getCursor(2)
+    db,curs = getCursor(2)
     id = list()
-	if op == ">":
-		result = curs.set_range(date.encode("utf-8"))
-		result = curs.next()
-	elif op == ">=":
-		result = curs.set_range(date.encode("utf-8"))
-	elif op == "<":
-		result = curs.set_range(max = date.encode("utf-8"))
-	elif op == "<=":
-		result = curs.set_range(max = date.encode("uft-8"))
+    if op == ">":
+        result = curs.set_range(date.encode("utf-8"))
+        result = curs.next()
+    elif op == ">=":
+        result = curs.set_range(date.encode("utf-8"))
+    elif op == "<":
+        result = curs.set_range(max = date.encode("utf-8"))
+    elif op == "<=":
+        result = curs.set_range(max = date.encode("uft-8"))
     elif op == "=":
         result = curs.set(date.encode("utf-8"))
         while(result != None):
             id.append(result[1].decode("utf-8"))
             result = curs.next_dup()
         return id
-	while(result != None):
-		id.append(result[1].decode("utf-8"))
-		result = curs.next()
-	return id
+    while(result != None):
+        id.append(result[1].decode("utf-8"))
+        result = curs.next()
+    return id
 
 def locationCheck(loc):
     db,curs = getCursor(2)
@@ -170,7 +170,7 @@ def catagoryCheck(cat):
     return id
 
 def termCheck(term):
-	db,curs = getCursor(1)
+    db,curs = getCursor(1)
     id = list()
     if term[-1] == '%':
         result = curs.set_range(term.encode("utf-8"))
@@ -187,12 +187,12 @@ def termCheck(term):
 
 def adSearch(idlist,output):
     db,curs = getCursor(0)
-    if output = "full":
+    if output == "full":
         for id in idlist:
             result.append(db.get(id.encode("utf-8")))
         return result
     #NOT COMPLETE NEED TO CHANGE
-    elif output = "brief":
+    elif output == "brief":
         #for id in idlist:
             #result.append(db.get(id.encode("utf-8")))
         #return result
