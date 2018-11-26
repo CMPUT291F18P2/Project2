@@ -19,7 +19,7 @@ def getCursor(type):
 	# Database for ads
 	if type == adsCurs:
 		adsFile = "ad.idx"
-		adsDatabase.open(adsFile, None, db.DB_HASH, db.DB_CREATE)
+		database.open(adsFile, None, db.DB_HASH, db.DB_CREATE)
 
 	# Database for terms
 	elif type == termsCurs:
