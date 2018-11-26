@@ -64,10 +64,10 @@ def grammar(input,outputFormat):
     query = "\\A({0})(?:[\\s]({0}))*\\Z".format(expression)
 
     inputquery = re.match(query, input)
-    if inputquery != None:
+    if inputquery:
         id = set(allAds())
-        inputexpr = re.match(expression,inputquery.group(0))
-        for expr in inputexpr.groups():
+        inputexpr = re.findall(expression,inputquery.group())
+        for expr in inputexpr:
             print(expr)
             if re.match(dateQuery,expr) != None:
                 pass
@@ -218,7 +218,7 @@ def main():
             print("Enter query, change format, quit\n")
 
         elif (userInput == "enter query"):
-            queryBreakdown(input("Query: "))
+            #queryBreakdown(input("Query: "))
             grammar(input("Query: "),outputFormat)
 
         elif (userInput == "change format"):
