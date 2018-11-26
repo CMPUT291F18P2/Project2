@@ -8,15 +8,15 @@ import re
 '''
 def getCursor(type):
 
-	adsCurs = 0
-	termsCurs = 1
-	pdateCurs = 2
-	pricesCurs = 3
+    adsCurs = 0
+    termsCurs = 1
+    pdateCurs = 2
+    pricesCurs = 3
 
-	database = db.DB()
+    database = db.DB()
 
 
-	# Database for ads
+    # Database for ads
     if type == adsCurs:
         adsFile = "ad.idx"
         database.open(adsFile, None, db.DB_HASH, db.DB_CREATE)
