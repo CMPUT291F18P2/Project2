@@ -77,7 +77,9 @@ def grammar(input):
             elif re.match(catQuery,expr) != None:
                 resultid = set(catagoryCheck(re.match(cat,re.match(catQuery,expr))))
             id = id & resultid
-        return id
+        ads = adSearch(id)
+        for ad in ads:
+            print(ad)
     else:
         print("Invalid query")
 ''' Preparing files for Berkeley DB usage
