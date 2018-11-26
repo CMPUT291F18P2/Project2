@@ -21,17 +21,17 @@ def indexAds():
 # Create b+-tree on terms.txt
 def indexTerms():
 	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('terms.txt','r'),stdout = subprocess.PIPE)
-	pipe2 = subprocess.Popen(["db_load","-c","duplicates=true","-T","-t","btree","te.idx"],stdin = pipe.stdout)
+	pipe2 = subprocess.Popen(["db_load","-c","duplicates=1","-T","-t","btree","te.idx"],stdin = pipe.stdout)
 
 # Create b+-tree on pdates.txt
 def indexPdates():
 	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('pdates.txt','r'),stdout = subprocess.PIPE)
-	pipe2 = subprocess.Popen(["db_load","-c","duplicates=true","-T","-t","btree","da.idx"],stdin = pipe.stdout)
+	pipe2 = subprocess.Popen(["db_load","-c","duplicates=1","-T","-t","btree","da.idx"],stdin = pipe.stdout)
 
 # Create b+-tree on prices.txt
 def indexPrices():
 	pipe = subprocess.Popen(["perl", "break.pl"],stdin = open('prices.txt','r'),stdout = subprocess.PIPE)
-	pipe2 = subprocess.Popen(["db_load","-c","duplicates=true","-T","-t","btree","pr.idx"],stdin = pipe.stdout)
+	pipe2 = subprocess.Popen(["db_load","-c","duplicates=1","-T","-t","btree","pr.idx"],stdin = pipe.stdout)
 
 def sortTxtFiles():
     subprocess.call(["sort","-u","ads.txt","-o","ads.txt"])
