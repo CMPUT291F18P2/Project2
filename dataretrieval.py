@@ -195,7 +195,7 @@ def adSearch(idlist,output):
     result = list()
     if output == "full":
         for id in idlist:
-            result.append(db.get(id.encode("utf-8")))
+            result.append(db.get(id.decode("utf-8")))
         return result
     #NOT COMPLETE NEED TO CHANGE
     elif output == "brief":
