@@ -41,7 +41,7 @@ def getCursor(type):
 
     return database, database.cursor()
 
-def grammar(input):
+def grammar(input,outputFormat):
 # grammar to check if the user's input complies with the format. can be used to determine if its a date query, location query, etc...
     alphanumeric = "[0-9a-zA-Z_-]"
     numeric = "[0-9]"
@@ -77,7 +77,7 @@ def grammar(input):
             elif re.match(catQuery,expr) != None:
                 resultid = set(catagoryCheck(re.match(cat,re.match(catQuery,expr))))
             id = id & resultid
-        ads = adSearch(id)
+        ads = adSearch(id,outputFormat)
         for ad in ads:
             print(ad)
     else:
@@ -216,7 +216,7 @@ def main():
 
         elif (userInput == "enter query"):
             queryBreakdown(input("Query: "))
-            grammar(input("Query: "))
+            grammar(input("Query: "),outputFormat)
 
         elif (userInput == "change format"):
             outputFormat = input("(full/brief): output=").lower()
