@@ -204,7 +204,7 @@ def adSearch(idlist,output):
         return 1
 
 def main():
-    prepFile()
+    # prepFile()
     outputFormat = "full"
 
     print("Welcome to Kijiji\n")
