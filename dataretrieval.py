@@ -24,19 +24,19 @@ def getCursor(type):
 	# Database for terms
     elif type == termsCurs:
         termsFile = "te.idx"
-        database.set_flags(db.DB_DUP)
+        #database.set_flags(db.DB_DUP)
         database.open(termsFile, None, db.DB_BTREE, db.DB_CREATE)
 
 	# Database for pdates
     elif type == pdateCurs:
         pdatesFile = "da.idx"
-        database.set_flags(db.DB_DUP)
+        #database.set_flags(db.DB_DUP)
         database.open(pdatesFile, None, db.DB_BTREE, db.DB_CREATE)
 
     # Database for prices
     elif type == pricesCurs:
         pricesFile = "pr.idx"
-        database.set_flags(db.DB_DUP)
+        #database.set_flags(db.DB_DUP)
         database.open(pricesFile, None, db.DB_BTREE, db.DB_CREATE)
 
     return database, database.cursor()
@@ -171,6 +171,7 @@ def catagoryCheck(cat):
     while iter:
         items = iter[1].decode("utf-8").split(",")
         print(items[1])
+        print(re.findall("camera",items[1]))
         if re.findall(cat,items[1]) != None:
             id.append(items[0])
         iter = curs.next()
