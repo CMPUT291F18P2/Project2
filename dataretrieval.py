@@ -158,7 +158,7 @@ def locationCheck(loc):
     iter = curs.first()
     id = list()
     while iter:
-        items = iter[1].split(",")
+        items = iter[1].decode("utf-8").split(",")
         if items[2] == loc:
             id.append(items[0])
         iter = curs.next()
@@ -169,7 +169,7 @@ def catagoryCheck(cat):
     iter = curs.first()
     id = list()
     while iter:
-        items = iter[1].split(",")
+        items = iter[1].decode("utf-8").split(",")
         if items[1] == loc:
             id.append(items[0])
         iter = curs.next()
