@@ -170,7 +170,7 @@ def catagoryCheck(cat):
     id = list()
     while iter:
         items = iter[1].decode("utf-8").split(",")
-        print(items)
+        print(items[1])
         if re.findall(cat,items[1]) != None:
             id.append(items[0])
         iter = curs.next()
