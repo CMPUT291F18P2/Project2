@@ -177,6 +177,7 @@ def termCheck(term):
     if term[-1] == '%':
         result = curs.set_range(term.encode("utf-8"))
         while (result[0].decode("utf-8")[0:len(term)-1] == term):
+            print(result[0].decode("utf-8")[0:len(term)-1])
             id.append(result[1].decode("utf-8"))
             result = curs.next()
         return id
