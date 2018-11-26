@@ -40,6 +40,7 @@ def getCursor(type):
 	return database, database.cursor()
 
 def grammar():
+# grammar to check if the user's input complies with the format. can be used to determine if its a date query, location query, etc...
 	alphanumeric = "[0-9a-zA-Z_-]"
 	numeric = "[0-9]"
 	date = "[0-9]{4}/[0-9]{2}/[0-9]{2}"
@@ -69,6 +70,7 @@ def prepFile():
 	indexing.main()
 
 def queryBreakdown(query):
+# separates operators from words regardless of spacing. still unsure of where to use it
 	phrases = re.findall(r"\w+", query)
 	operators = re.findall(r">=|<=|=|<|>", query)
 
@@ -106,6 +108,7 @@ def dateCheck(op,date):
 	return id
 
 def termCheck(term):
+# still needs to be completed
 	return 0
 
 def main():
