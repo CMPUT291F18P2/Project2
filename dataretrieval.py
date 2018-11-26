@@ -78,7 +78,7 @@ def grammar(input,outputFormat):
             elif re.match(catQuery,expr) != None:
                 resultid = set(catagoryCheck(re.findall(cat,expr)[1]))
             id = id & resultid
-            print(id)
+            print(list(id))
         ads = adSearch(id,outputFormat)
         for ad in ads:
             print(ad)
