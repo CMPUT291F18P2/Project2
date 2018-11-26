@@ -48,16 +48,8 @@ def prepFile():
 	indexing.main()
 
 def queryBreakdown(query):
-	commands = {date:dateCheck,price:priceCheck,location:locationCheck,cat:catagoryCheck}
 	phrases = re.findall(r"\w+", query)
 	operators = re.findall(r">=|<=|=|<|>", query)
-	for stuff in len(splitquery):
-		if splitquery[stuff] in commands:
-			stuff1 = splitquery[stuff+1]
-			stuff1 = splitquery[stuff+2]
-			commands[splitquery[stuff]](stuff1,stuff2)
-		else:
-			termsCheck(splitquery[stuff])
 
 def priceCheck(op,num):
 	db,curs = getCursor(4)
