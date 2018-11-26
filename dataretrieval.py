@@ -110,11 +110,11 @@ def priceCheck(op,num):
     db,curs = getCursor(3)
     id = list()
     if op[0] == ">":
-        result = curs.set_range(num.encode("utf-8"))
+        result = curs.set_range(num[0].encode("utf-8"))
     elif op[0] == "<":
-        result = curs.set_range(num.encode("utf-8"))
+        result = curs.set_range(num[0].encode("utf-8"))
     elif op[0] == "=":
-        result = curs.set(num.encode("utf-8"))
+        result = curs.set(num[0].encode("utf-8"))
         while(result != None):
             id.append(result[1].decode("utf-8"))
             result = curs.next_dup()
