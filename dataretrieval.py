@@ -75,42 +75,102 @@ def queryBreakdown(query):
 	operators = re.findall(r">=|<=|=|<|>", query)
 
 def priceCheck(op,num):
-	db,curs = getCursor(3)
-	if op == ">":
+    db,curs = getCursor(3)
+    id = list()
+    if op == ">":
+        result = curs.set_range(num.encode("utf-8"))
+        result = curs.next()
+    elif op == ">=":
 		result = curs.set_range(num.encode("utf-8"))
-		result = curs.next()
-	elif op == ">=":
-		result = curs.set_range(num.encode("utf-8"))
-	elif op == "<":
+    elif op == "<":
 		result = curs.set_range(max = num.encode("utf-8"))
 		result = curs.next()
-	elif op == "<=":
+    elif op == "<=":
 		result = curs.set_range(max = num.encode("utf-8"))
+    elif op == "=":
+        result = curs.set(num.encode("utf-8"))
+        while(result != None):
+            id.append(result[1].decode("utf-8"))
+            result = curs.next_dup()
+        return id
 	while(result != None):
-		id = result[1].decode("utf-8")
+		id.append(result[1].decode("utf-8"))
 		result = curs.next()
 	return id
 
 def dateCheck(op,date):
 	db,curs = getCursor(2)
+    id = list()
 	if op == ">":
-		result = curs.set_range(num.encode("utf-8"))
+		result = curs.set_range(date.encode("utf-8"))
 		result = curs.next()
 	elif op == ">=":
-		result = curs.set_range(num.encode("utf-8"))
+		result = curs.set_range(date.encode("utf-8"))
 	elif op == "<":
-		result = curs.set_range(max = num.encode("utf-8"))
+		result = curs.set_range(max = date.encode("utf-8"))
 	elif op == "<=":
-		result = curs.set_range(max = num.encode("uft-8"))
+		result = curs.set_range(max = date.encode("uft-8"))
+    elif op == "=":
+        result = curs.set(date.encode("utf-8"))
+        while(result != None):
+            id.append(result[1].decode("utf-8"))
+            result = curs.next_dup()
+        return id
 	while(result != None):
-		id = result[1].decode("utf-8")
+		id.append(result[1].decode("utf-8"))
 		result = curs.next()
 	return id
 
+def locationCheck(loc):
+    db,curs = getCursor(2)
+    iter = curs.first()
+    id = list()
+    while iter:
+        items = iter[1].split(",")
+        if items[2] == loc:
+            id.append(items[0])
+        iter = curs.next()
+    return id
+
+def catagoryCheck(cat):
+    db,curs = getCursor(2)
+    iter = curs.first()
+    id = list()
+    while iter:
+        items = iter[1].split(",")
+        if items[1] == loc:
+            id.append(items[0])
+        iter = curs.next()
+    return id
+
 def termCheck(term):
 	db,curs = getCursor(1)
-# still needs to be completed
-	return 0
+    id = list()
+    if term[-1] == '%':
+        result = curs.set_range(term.encode("utf-8"))
+        while (result[0].decode("utf-8")[0:len(term)-1] == term):
+            id.append(result[1].decode("utf-8"))
+            result = curs.next()
+        return id
+    else:
+        result = curs.set(term.encode("utf-8"))
+        while(result != None):
+            id.append(result[1].decode("utf-8"))
+            result = curs.next()
+        return id
+
+def adSearch(idlist,output):
+    db,curs = getCursor(0)
+    if output = "full":
+        for id in idlist:
+            result.append(db.get(id.encode("utf-8")))
+        return result
+    #NOT COMPLETE NEED TO CHANGE
+    elif output = "brief":
+        #for id in idlist:
+            #result.append(db.get(id.encode("utf-8")))
+        #return result
+        return 1
 
 def main():
 	prepFile()
