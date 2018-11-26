@@ -72,7 +72,6 @@ def grammar(input,outputFormat):
             if re.match(dateQuery,expr) != None:
                 pass
             elif re.match(priceQuery,expr) != None:
-                print(re.findall("(?:=|>|<|>=|<=)",expr))
                 resultid = set(priceCheck(re.findall(["=<>"],expr),re.findall(price,expr)))
             elif re.match(locationQuery,expr) != None:
                 resultid = set(locationCheck(re.findall(location,expr)[1]))
@@ -110,22 +109,18 @@ def queryBreakdown(query):
 def priceCheck(op,num):
     db,curs = getCursor(3)
     id = list()
-    if op == ">":
+    if op[0] == ">":
         result = curs.set_range(num.encode("utf-8"))
-        result = curs.next()
-    elif op == ">=":
+    elif op[0] == "<":
         result = curs.set_range(num.encode("utf-8"))
-    elif op == "<":
-        result = curs.set_range(max = num.encode("utf-8"))
-        result = curs.next()
-    elif op == "<=":
-        result = curs.set_range(max = num.encode("utf-8"))
-    elif op == "=":
+    elif op[0] == "=":
         result = curs.set(num.encode("utf-8"))
         while(result != None):
             id.append(result[1].decode("utf-8"))
             result = curs.next_dup()
         return id
+    if len(op) == 2:
+        result = curs.next()
     while(result != None):
         id.append(result[1].decode("utf-8"))
         result = curs.next()
