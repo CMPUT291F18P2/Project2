@@ -134,7 +134,7 @@ def createPrices(dataDict):
         aid = ad[0][1]
         cat = ad[3][1]
         loc = ad[2][1]
-        f3.write('%s:%s,%s,%s\n' % (price, aid, cat, loc))
+        f3.write('%s:%s,%s,%s\n'.rjust(12) % (price, aid, cat, loc))
     f3.close()
     return f3
 
