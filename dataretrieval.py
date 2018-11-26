@@ -154,7 +154,7 @@ def locationCheck(loc):
     id = list()
     while iter:
         items = iter[1].decode("utf-8").split(",")
-        if re.findall(loc,items[1]) != None:
+        if re.match(loc,items[1]) != None:
             id.append(items[0])
         iter = curs.next()
     return id
