@@ -98,7 +98,7 @@ def allAds():
     iter = curs.first()
     id = list()
     while iter:
-        id.append(iter[0])
+        id.append(iter[0].decode("utf-8"))
         iter = curs.next()
     return id
 
@@ -200,7 +200,7 @@ def adSearch(idlist,output):
     result = list()
     if output == "full":
         for id in idlist:
-            result.append(db.get(id))
+            result.append(db.get(id.encode("utf-8")))
         return result
     #NOT COMPLETE NEED TO CHANGE
     elif output == "brief":
