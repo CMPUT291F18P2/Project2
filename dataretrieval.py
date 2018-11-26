@@ -112,7 +112,7 @@ def priceCheck(op,num):
     if op[0] == ">":
         result = curs.set_range(num[0].encode("utf-8"))
     elif op[0] == "<":
-        result = curs.set_range(num[0].encode("utf-8"))
+        result = curs.set_range(max = num[0].encode("utf-8"))
     elif op[0] == "=":
         result = curs.set(num[0].encode("utf-8"))
         while(result != None):
@@ -129,21 +129,18 @@ def priceCheck(op,num):
 def dateCheck(op,date):
     db,curs = getCursor(2)
     id = list()
-    if op == ">":
-        result = curs.set_range(date.encode("utf-8"))
-        result = curs.next()
-    elif op == ">=":
-        result = curs.set_range(date.encode("utf-8"))
-    elif op == "<":
-        result = curs.set_range(max = date.encode("utf-8"))
-    elif op == "<=":
-        result = curs.set_range(max = date.encode("uft-8"))
-    elif op == "=":
-        result = curs.set(date.encode("utf-8"))
+    if op[0] == ">":
+        result = curs.set_range(date[0].encode("utf-8"))
+    elif op[0] == "<":
+        result = curs.set_range(max = date[0].encode("utf-8"))
+    elif op[0] == "=":
+        result = curs.set(date[0].encode("utf-8"))
         while(result != None):
             id.append(result[1].decode("utf-8").split(",")[0])
             result = curs.next_dup()
         return id
+    if len(op) == 2:
+        result = curs.next()
     while(result != None):
         id.append(result[1].decode("utf-8").split(",")[0])
         result = curs.next()
